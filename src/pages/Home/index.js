@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, StatusBar, ScrollView } from 'react-native';
+import { useSelector, useDispatch } from "react-redux"
 
 import Filters from '../../components/CategoryFilters';
 import Header from '../../components/Header'
@@ -10,10 +11,13 @@ import gamesList from '../../db/products.json';
 import gamesImages from '../../assets/images.js'
 
 const Home = ({navigation}) => {
+  const store = useSelector(state => state.cartState)
+  const dispatch = useDispatch()
+
   return (
     <View style={styles.container}>
       <StatusBar barStyle="light-content" />
-      <Header navigation={navigation}/>
+      <Header navigation={navigation} cartCount={store.gamesCart.length}/>
       <ScrollView >
         <Filters />
         <View style={styles.list}>
