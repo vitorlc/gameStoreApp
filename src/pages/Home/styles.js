@@ -5,5 +5,10 @@ export default StyleSheet.create({
     flex: 1,
     backgroundColor: '#343434',
   },
+  list: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    flexWrap: 'wrap'
+  }
 
 })
