@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { SafeAreaView, View, TouchableOpacity, Text, ScrollView } from 'react-native';
+import { useSelector, useDispatch } from "react-redux"
 import Back from '../../assets/angle-arrow-down.svg'
 
 import Game from '../../components/Game'
@@ -10,14 +11,29 @@ import gamesImages from '../../assets/images.js'
 import styles from './styles'
 
 const Cart = ({navigation}) => {
-  const [cart, setcart] = useState([])
+  const store = useSelector(state => state.cartState)
+  const [cart, setCart] = useState([])
+  const [cartCost, setCartCost] = useState(0)
+  const [transportCost, setTransportCost] = useState(0)
 
   useEffect(() => {
-    setcart([])
-    setcart(prevArray => [...prevArray, gamesList[0]])
-    setcart(prevArray => [...prevArray, gamesList[1]])
-    setcart(prevArray => [...prevArray, gamesList[2]])
+    setCart([])
+    if(store.gamesCart.length) {
+      let cost = 0
+      for(let item of store.gamesCart) {
+        cost += item.price
+        setCart(prevArray => [...prevArray, item])
+      }
+      setCartCost(cost)
+      setTransportCost(calculateTransportCost(cost, store.gamesCart.length))
+    }
   }, [])
+
+  const calculateTransportCost = (cartCost, itensCount) => {
+    if(cartCost >= 250)
+      return 0
+    return itensCount * 10
+  }
 
   return (
     <SafeAreaView style={styles.container}>
@@ -29,9 +45,9 @@ const Cart = ({navigation}) => {
       </View>
       <ScrollView style={{flex: 1}}>
         {
-          cart.map(game => (
+          cart.map((game, index) => (
             <Game
-              key={game.id}
+              key={index}
               game={game}
               image={gamesImages[game.id].image}
             />
@@ -40,8 +56,8 @@ const Cart = ({navigation}) => {
       </ScrollView>
 
       <View style={styles.footer}>
-        <Text style={styles.text}>Valor Total: {`R$ 100`}</Text>
-        <Text style={styles.text}>Frete: {`R$ 100`}</Text>
+        <Text style={styles.text}>Valor Total: {`R$ ${cartCost}`}</Text>
+        <Text style={styles.text}>Frete: {`R$ ${transportCost}`}</Text>
         <TouchableOpacity style={styles.button}>
           <Text style={styles.text}>Finalizar Compra</Text>
         </TouchableOpacity>
