@@ -1,14 +1,16 @@
 import React from 'react'
-import {View, StyleSheet, Image, Text, SafeAreaView, Dimensions} from 'react-native'
-import Cart from '../../assets/cart-icon.svg'
+import {View, StyleSheet, Image, Text, SafeAreaView, TouchableOpacity} from 'react-native'
+import Cart from '../assets/cart-icon.svg'
 
 const Header = ({}) => {
   return (
     <SafeAreaView style={styles.wrapper}>
-      <Image style={styles.logo} source={require('../../assets/logo.png')}></Image>
+      <Image style={styles.logo} source={require('../assets/logo.png')}></Image>
       <View style={styles.cart}>
-        <Cart height={30}/>
-        <Text style={styles.title}>Carrinho</Text>
+        <TouchableOpacity style={{marginTop: 10}}>
+          <Cart height={30}/>
+          <Text style={styles.title}>Carrinho</Text>
+        </TouchableOpacity>
       </View>
     </SafeAreaView>
   )
@@ -35,7 +37,9 @@ const styles = StyleSheet.create({
   },
   cart: {
     marginTop: 10,
-    }
+    position: 'absolute',
+    right: 0
+  }
 })
 
 export default Header
