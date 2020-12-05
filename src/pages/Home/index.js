@@ -2,7 +2,8 @@ import React from 'react';
 import { View, StatusBar, ScrollView } from 'react-native';
 import { useSelector, useDispatch } from "react-redux"
 
-import Filters from '../../components/CategoryFilters';
+import CategoryFilters from '../../components/CategoryFilters';
+import Filters from '../../components/Filters'
 import Header from '../../components/Header'
 import Game from '../../components/Game'
 import styles from './styles';
@@ -20,7 +21,8 @@ const Home = ({navigation}) => {
       <StatusBar barStyle="light-content" />
       <Header navigation={navigation} cartCount={store.gamesCart.length}/>
       <ScrollView >
-        <Filters />
+        <CategoryFilters />
+        <Filters/>
         <View style={styles.list}>
           {gamesList.map(game => ( 
             <Game
