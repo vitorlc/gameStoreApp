@@ -1,7 +1,7 @@
 import React from 'react';
 import { Text, TouchableOpacity, Image, StyleSheet, View } from 'react-native';
 
-const Game = ({game, image}) => {
+const Game = ({game, image, click}) => {
   const filterName = (name) => {
     if(name.length < 27)
       return name
@@ -9,7 +9,7 @@ const Game = ({game, image}) => {
   }
 
   return (
-    <TouchableOpacity style={styles.container}>
+    <TouchableOpacity style={styles.container} onPress={click}>
       <Image
         source={image}
         style={styles.gameImage}

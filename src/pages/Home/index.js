@@ -6,6 +6,7 @@ import Filters from '../../components/CategoryFilters';
 import Header from '../../components/Header'
 import Game from '../../components/Game'
 import styles from './styles';
+import { addItemCart } from "../../actions"
 
 import gamesList from '../../db/products.json';
 import gamesImages from '../../assets/images.js'
@@ -26,6 +27,7 @@ const Home = ({navigation}) => {
               key={game.id}
               game={game}
               image={gamesImages[game.id].image}
+              click={()=> dispatch(addItemCart(game))}
             />
           ))}
         </View>
