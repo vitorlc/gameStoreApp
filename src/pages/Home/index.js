@@ -1,17 +1,16 @@
 import React from 'react';
-import { View, Text, StatusBar } from 'react-native';
+import { View, StatusBar } from 'react-native';
+import Filters from '../../components/CategoryFilters';
 import Header from '../../components/Header'
 import styles from './styles';
 
 const Home = () => {
   return (
-    <>
+    <View style={styles.container}>
       <StatusBar barStyle="light-content"/>
       <Header></Header>
-      <View style={styles.container}>
-        <Text>Home</Text>
-      </View>
-    </>
+      <Filters></Filters>
+    </View>
   );
 }
 
