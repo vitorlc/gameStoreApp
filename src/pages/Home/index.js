@@ -9,11 +9,11 @@ import styles from './styles';
 import gamesList from '../../db/products.json';
 import gamesImages from '../../assets/images.js'
 
-const Home = () => {
+const Home = ({navigation}) => {
   return (
     <View style={styles.container}>
       <StatusBar barStyle="light-content" />
-      <Header />
+      <Header navigation={navigation}/>
       <ScrollView >
         <Filters />
         <View style={styles.list}>

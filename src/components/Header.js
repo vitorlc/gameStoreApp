@@ -2,12 +2,12 @@ import React from 'react'
 import {View, StyleSheet, Image, Text, SafeAreaView, TouchableOpacity} from 'react-native'
 import Cart from '../assets/cart-icon.svg'
 
-const Header = ({}) => {
+const Header = ({navigation}) => {
   return (
     <SafeAreaView style={styles.wrapper}>
       <Image style={styles.logo} source={require('../assets/logo.png')}></Image>
       <View style={styles.cart}>
-        <TouchableOpacity style={{marginTop: 10}}>
+        <TouchableOpacity style={{marginTop: 10}} onPress={() => navigation.navigate('Carrinho')}>
           <Cart height={30}/>
           <Text style={styles.title}>Carrinho</Text>
         </TouchableOpacity>
