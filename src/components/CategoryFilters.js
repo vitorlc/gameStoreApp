@@ -33,8 +33,8 @@ const Filters = () => {
   return (
     <ScrollView style={styles.line} horizontal={true} >
       {
-        CategoryList.map(e => (
-          <TouchableOpacity style={styles.category}>
+        CategoryList.map((e, index) => (
+          <TouchableOpacity style={styles.category} key={index}>
             <Text style={styles.text}>{e.name}</Text>
           </TouchableOpacity>
         ))
