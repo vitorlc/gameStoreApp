@@ -23,8 +23,8 @@ const ModalFilter = ({ modalVisible, hideModal, setOrderFunction }) => {
       <View style={styles.wrapper}>
         <View style={styles.modalView}>
           {
-            orderList.map(e => (
-              <View style={styles.orderBox}>
+            orderList.map((e, index) => (
+              <View style={styles.orderBox} key={index}>
                 <TouchableOpacity
                   style={styles.orderItem}
                   onPress={() => {
