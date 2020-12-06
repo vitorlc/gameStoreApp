@@ -24,7 +24,9 @@ const Home = ({navigation}) => {
         <CategoryFilters />
         <Filters/>
         <View style={styles.list}>
-          {gamesList.map(game => ( 
+          {gamesList
+          .sort((a, b) => a[store.orderBy.key] > b[store.orderBy.key] ? 1 : -1)
+          .map(game => ( 
             <Game
               key={game.id}
               game={game}
