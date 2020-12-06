@@ -5,12 +5,11 @@ import Back from '../../assets/angle-arrow-down.svg'
 
 import Game from '../../components/Game'
 
-import gamesList from '../../db/products.json';
 import gamesImages from '../../assets/images.js'
 
 import styles from './styles'
 
-const Cart = ({navigation}) => {
+const Cart = ({ navigation }) => {
   const store = useSelector(state => state.cartState)
   const [cart, setCart] = useState([])
   const [cartCost, setCartCost] = useState(0)
@@ -18,9 +17,9 @@ const Cart = ({navigation}) => {
 
   useEffect(() => {
     setCart([])
-    if(store.gamesCart.length) {
+    if (store.gamesCart.length) {
       let cost = 0
-      for(let item of store.gamesCart) {
+      for (let item of store.gamesCart) {
         cost += item.price
         setCart(prevArray => [...prevArray, item])
       }
@@ -29,11 +28,22 @@ const Cart = ({navigation}) => {
     }
   }, [])
 
+  const countItens = (length) => {
+    if (length > 1) return `${length} Itens`
+    else return `${length} Item`
+  }
+
   const calculateTransportCost = (cartCost, itensCount) => {
-    if(cartCost >= 250)
+    if (cartCost >= 250)
       return 0
     return itensCount * 10
   }
+
+  const calculateTotal = (subtotal, transportCost) => {
+    const total = subtotal+transportCost
+    return total.toFixed(2)
+  }
+    
 
   return (
     <SafeAreaView style={styles.container}>
@@ -43,7 +53,7 @@ const Cart = ({navigation}) => {
         </TouchableOpacity>
         <Text style={styles.title}>CARRINHO</Text>
       </View>
-      <ScrollView style={{flex: 1}}>
+      <ScrollView style={{ flex: 1 }}>
         {
           cart.map((game, index) => (
             <Game
@@ -56,8 +66,9 @@ const Cart = ({navigation}) => {
       </ScrollView>
 
       <View style={styles.footer}>
-        <Text style={styles.text}>Valor Total: {`R$ ${cartCost}`}</Text>
+        <Text style={styles.text}>Subtotal ({countItens(store.gamesCart.length)}) : {`R$ ${cartCost.toFixed(2)}`}</Text>
         <Text style={styles.text}>Frete: {`R$ ${transportCost}`}</Text>
+        <Text style={styles.text}>Total: {`R$ ${calculateTotal(cartCost, transportCost)}`}</Text>
         <TouchableOpacity style={styles.button}>
           <Text style={styles.text}>Finalizar Compra</Text>
         </TouchableOpacity>
