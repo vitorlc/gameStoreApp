@@ -8,7 +8,7 @@ import ModalFilter from './ModalFilter'
 
 const Filters = ({}) => {
   const [modalVisible, setModalVisible] = useState(false);
-  const [order, setOrder] = useState({name: 'Popularidade'})
+  const [order, setOrder] = useState({name: 'Popularidade', key: 'score'})
   const store = useSelector(state => state.cartState)
   const dispatch = useDispatch()
 
